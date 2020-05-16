@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'criar-conta',
+    loadChildren: () => import('./criar-conta/criar-conta.module').then( m => m.CriarContaPageModule)
+  },
+  {
+    path: 'painel-usuario',
+    loadChildren: () => import('./painel-usuario/painel-usuario.module').then( m => m.PainelUsuarioPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,20 +1,52 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="primary">
     <ion-title>
-      Blank
+      Login
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Sistema Etec</ion-card-title>
+    </ion-card-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <!-- Quando eu for fazer um formulário com validação eu preciso colocar um formGroup -->
+    <!-- (ngSubmit) envia os dados e chama a função login() -->
+    <form [formGroup]="formLogin" (ngSubmit)="login()">
+      <!-- Email -->
+      <ion-item>
+        <!-- formControlName substitui o [(ngModel)] quando é um formulário -->
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+        <!-- *ngFor percorre a variavel de verificação -->
+        <ng-container *ngFor="let erro of mensagens_validacao.email">
+          <!-- *ngIf analisa a situação do campo e mostra um mensagem de erro quando necessário -->
+          <span
+          *ngIf="formLogin.get('email').hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email').touched)"
+          class="msg-erro">
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
+      </ion-item>
+      <!-- Senha -->
+      <ion-item>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input formControlName="senha" type="password"></ion-input>
+        <ng-container *ngFor="let erro of mensagens_validacao.senha">
+          <span
+          *ngIf="formLogin.get('senha').hasError(erro.tipo) && (formLogin.get('senha').dirty || formLogin.get('senha').touched)"
+          class="msg-erro">
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
+      </ion-item>
+      <br>
+      <!-- Executa o (ngSubmit) -->
+      <ion-button expand="block" color="primary" type="submit">Login</ion-button>
+      <!-- Leva para a página de criação de uma conta -->
+      <ion-button expand="block" fill="outline" color="primary" routerLink="/criar-conta">Criar Conta</ion-button>
+    </form>
+  </ion-card>
 </ion-content>

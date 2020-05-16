@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Criar Conta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formCriarConta" (ngSubmit)="criarConta()">
+     <!-- Nome Completo -->
+     <ion-item>
+      <ion-label position="stacked">Nome Completo</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.nome">
+        <span
+        *ngIf="formCriarConta.get('nome').hasError(erro.tipo) && (formCriarConta.get('nome').dirty || formCriarConta.get('nome').touched)"
+        class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+     <!-- Sexo -->
+     <ion-item>
+      <ion-label>Sexo</ion-label>
+      <ion-select formControlName="sexo" placeholder="Selecione...">
+        <ion-select-option value="F">Feminino</ion-select-option>
+        <ion-select-option value="M">Masculino</ion-select-option>
+      </ion-select>
+      <ng-container *ngFor="let erro of mensagens_validacao.sexo">
+        <span
+        *ngIf="formCriarConta.get('sexo').hasError(erro.tipo) && (formCriarConta.get('sexo').dirty || formCriarConta.get('sexo').touched)"
+        class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+     <!-- CPF -->
+     <ion-item>
+      <ion-label position="stacked">CPF</ion-label>
+      <ion-input formControlName="cpf" type="text" max="11" placeholder="Somento números"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.cpf">
+        <span
+        *ngIf="formCriarConta.get('cpf').hasError(erro.tipo) && (formCriarConta.get('cpf').dirty || formCriarConta.get('cpf').touched)"
+        class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+    <!-- Data Nascimento -->
+    <ion-item>
+      <ion-label position="stacked">Data de Nascimento:</ion-label>
+      <ion-datetime formControlName="dataNascimento" display-format="DD/MM/YYYY" placeholder="Selecione a Data"></ion-datetime>
+      <ng-container *ngFor="let erro of mensagens_validacao.dataNascimento">
+        <span
+        *ngIf="formCriarConta.get('dataNascimento').hasError(erro.tipo) && (formCriarConta.get('dataNascimento').dirty || formCriarConta.get('dataNascimento').touched)"
+        class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+    <!-- Email -->
+    <ion-item>
+      <ion-label position="stacked">E-mail</ion-label>
+      <ion-input formControlName="email" type="text"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.email">
+        <span
+        *ngIf="formCriarConta.get('email').hasError(erro.tipo) && (formCriarConta.get('email').dirty || formCriarConta.get('email').touched)"
+        class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+    <!-- Senha -->
+    <ion-item>
+      <ion-label position="stacked">Senha</ion-label>
+      <ion-input formControlName="senha" type="password"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.senha">
+        <span
+        *ngIf="formCriarConta.get('senha').hasError(erro.tipo) && (formCriarConta.get('senha').dirty || formCriarConta.get('senha').touched)"
+        class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+    <!-- Confirmação Senha -->
+    <ion-item>
+      <ion-label position="stacked">Senha novamente</ion-label>
+      <ion-input formControlName="senhaConfirmacao" type="password"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.senhaConfirmacao">
+        <span
+        *ngIf="formCriarConta.get('senhaConfirmacao').hasError(erro.tipo) && (formCriarConta.get('senhaConfirmacao').dirty || formCriarConta.get('senhaConfirmacao').touched)"
+        class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+    
+    <ion-button expand="block" color="primary" type="submit">Criar Conta</ion-button>
+  </form>
+</ion-content>
